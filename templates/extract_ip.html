@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% block content %}
+<table id="extractIP" align="center">
+	<tr>
+		<th>
+			<h4>Extract IPs From:</h4>
+		</th>
+		<th>
+			Results:
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<form enctype="multipart/form-data" action="/extractip" method="post">
+				{% module xsrf_form_html() %}
+				Text/PDF: <input type="file" name="filearg" />
+				<input type="submit" value="Extract!" />
+		</td>
+		<td rowspan="2">
+			{% if results %}
+			<div id="extractipResults">
+				{% for result in results %}
+					{{result}}<br />
+				{% end %}
+			</div>
+			{% end %}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<br />
+			Pasted Text: <br />
+			<textarea cols="40" rows="8" name="textarea"></textarea>
+			<br />
+			<input type="submit" value="Extract!" />
+			</form>
+
+		</td>
+
+	</tr>
+</table>
+{% end %}

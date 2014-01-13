@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% block content %}
+<table id="cybox" align="center">
+	<tr>
+		<th>
+			<h4>Bulk IP Whois:</h4>
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<form enctype="multipart/form-data" action="/whois" method="post">
+				List of IPs: <br />
+				<textarea cols="40" rows="8" name="textarea"></textarea><br />
+				<input type="submit" value="Lookup" />
+			</form>
+		</td>
+	</tr>	
+</table>
+{% if results %}
+<table id="whoisTable" align="center" cellspacing="0">
+	<tr id="first">
+		<th>IP</th>
+		<th>Country</th>
+		<th>AS Name</th>
+		<th>Registry</th>
+		<th>BGP Prefix</th>
+		<th>Allocated Date</th>
+		<th>ASN</th>
+	</tr>
+	{% for ip, info in results.items() %}
+	<tr>
+		<td>{{ ip }}</td>
+		<td>{{ info['cc'] }}</td>
+		<td>{{ info['as_name'] }}</td>
+		<td>{{ info['registry'] }}</td>
+		<td>{{ info['bgp_prefix'] }}</td>
+		<td>{{ info['allocated'] }}</td>
+		<td>{{ info['asn'] }}</td>
+	</tr>
+	{% end %}
+</table>
+{% end %}
+
+{% end %}

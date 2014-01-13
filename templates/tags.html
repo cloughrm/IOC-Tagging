@@ -1,0 +1,105 @@
+{% extends 'main.html' %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ static_url('css/tags.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ static_url('css/tipTip.css') }}">
+<script src="{{ static_url('js/tags.js') }}" type="application/javascript"></script>
+<script src="{{ static_url('js/jquery.tipTip.minified.js') }}" type="application/javascript"></script>
+<br/>
+<table id="tagsMasterTable" border="0">
+	<tr>
+
+
+		<!-- SEARCH TABLE -->
+		<td>
+			<table class="tagsTable" border="0">
+				<tr>
+					<th>{% if search_result %}Results for: {{ query.replace('_', ' ') }}{% else %}Search IOC's{%end %}</th>
+					<th align="right">
+						<div id="iocSearch">
+								<form>
+									<input style="float:right" id="submitIOC" type="submit" value="Search" />
+									<input style="float:right" type="text" id="ioc_query" />
+								</form>
+						</div>
+					</th>
+				</tr>
+				{% if search_result %}
+
+					{% for item in search_result %}
+						<tr>
+							<td colspan="2">
+								<div class="iocResult"><a href="/tags/ioc/{{ item['ioc'] }}">{{ item['ioc'] }}</a></div>
+								{% for tag in item['tags'] %}
+									<a href="/tags/tag/{{ tag['text'] }}"><div class="tag" title="{{ tag['source'].replace('_', ' ') }}">{{ tag['text'].replace('_', ' ') }}</div><a/>
+								{% end %}
+							</td>
+						</tr>
+					{% end %}
+
+
+
+				{% else %}
+					<tr><td colspan="2"><br/>Enter a search term such as "1.2.3.4" or "domain.com"<br/><br/></td></tr>
+				{% end %}
+			</table>
+		</td>
+
+
+		<!-- RIGHT COLUMN -->
+		<td width="30%" rowspan="2" valign="top">
+			<table class="tagsTable" border="0">
+				<tr>
+					<th colspan="2">Sources</th>
+				</tr>
+				{% for item in sources %}
+				<tr>
+					<td><a href="/tags/source/{{ item['source'] }}">{{ item['source'].replace('_', ' ') }}</td><td>{{ item['num_tags'] }} tags</a></td>
+				</tr>
+				{% end %}
+			</table>
+			<br/>
+			<table class="tagsTable" border="0">
+				<tr>
+					<th>Latest Indicators</th>
+				</tr>
+				{% for item in latest_iocs %}
+					<tr>
+						<td>
+							<a href="/tags/ioc/{{item['ioc']}}">{{item['ioc']}}</a><br/>
+							{% for tag in item['tags'] %}
+								<a href="/tags/tag/{{ tag['text'] }}"><div class="tag" title="{{ tag['source'].replace('_', ' ') }}">{{ tag['text'].replace('_', ' ') }}</div></a>
+							{% end %}
+							<hr>
+						</td>
+					</tr>
+				{% end %}
+			</table>
+		</td>
+	</tr>
+
+
+
+	<!-- TOP TAGS TABLE -->
+	<tr>
+		<td>
+			<table class="tagsTable" border="0">
+				<tr>
+					<th colspan="2">Top Tagged</th>
+				</tr>
+				{% for item in top_tags %}
+					<tr>
+						<td>
+							<a href="/tags/ioc/{{ item['ioc'] }}">{{ item['ioc'] }}</a>
+						</td>
+						<td align="left">
+							{% for tag in item['tags'] %}
+								<a href="/tags/tag/{{ tag['text'] }}"><div class="tag" title="{{ tag['source'].replace('_', ' ') }}">{{tag['text'].replace('_', ' ')}}</div></a>
+							{% end %}
+						</td>
+					</tr>
+				{% end %}
+			</table>
+		</td>
+	</tr>
+</table>
+{% end %}
