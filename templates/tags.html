@@ -1,9 +1,9 @@
 {% extends 'main.html' %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{{ static_url('css/tags.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ static_url('css/tipTip.css') }}">
-<script src="{{ static_url('js/tags.js') }}" type="application/javascript"></script>
-<script src="{{ static_url('js/jquery.tipTip.minified.js') }}" type="application/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/ioc/static/css/tags.css">
+<link rel="stylesheet" type="text/css" href="/ioc/static/css/tipTip.css">
+<script src="/ioc/static/js/tags.js" type="application/javascript"></script>
+<script src="/ioc/static/js/jquery.tipTip.minified.js" type="application/javascript"></script>
 <br/>
 <table id="tagsMasterTable" border="0">
 	<tr>
@@ -28,9 +28,9 @@
 					{% for item in search_result %}
 						<tr>
 							<td colspan="2">
-								<div class="iocResult"><a href="/tags/ioc/{{ item['ioc'] }}">{{ item['ioc'] }}</a></div>
+								<div class="iocResult"><a href="/ioc/tags/ioc/{{ item['ioc'] }}">{{ item['ioc'] }}</a></div>
 								{% for tag in item['tags'] %}
-									<a href="/tags/tag/{{ tag['text'] }}"><div class="tag" title="{{ tag['source'].replace('_', ' ') }}">{{ tag['text'].replace('_', ' ') }}</div><a/>
+									<a href="/ioc/tags/tag/{{ tag['text'] }}"><div class="tag" title="{{ tag['source'].replace('_', ' ') }}">{{ tag['text'].replace('_', ' ') }}</div><a/>
 								{% end %}
 							</td>
 						</tr>
@@ -53,7 +53,7 @@
 				</tr>
 				{% for item in sources %}
 				<tr>
-					<td><a href="/tags/source/{{ item['source'] }}">{{ item['source'].replace('_', ' ') }}</td><td>{{ item['num_tags'] }} tags</a></td>
+					<td><a href="/ioc/tags/source/{{ item['source'] }}">{{ item['source'].replace('_', ' ') }}</td><td>{{ item['num_tags'] }} tags</a></td>
 				</tr>
 				{% end %}
 			</table>
@@ -65,9 +65,9 @@
 				{% for item in latest_iocs %}
 					<tr>
 						<td>
-							<a href="/tags/ioc/{{item['ioc']}}">{{item['ioc']}}</a><br/>
+							<a href="/ioc/tags/ioc/{{item['ioc']}}">{{item['ioc']}}</a><br/>
 							{% for tag in item['tags'] %}
-								<a href="/tags/tag/{{ tag['text'] }}"><div class="tag" title="{{ tag['source'].replace('_', ' ') }}">{{ tag['text'].replace('_', ' ') }}</div></a>
+								<a href="/ioc/tags/tag/{{ tag['text'] }}"><div class="tag" title="{{ tag['source'].replace('_', ' ') }}">{{ tag['text'].replace('_', ' ') }}</div></a>
 							{% end %}
 							<hr>
 						</td>
@@ -89,11 +89,11 @@
 				{% for item in top_tags %}
 					<tr>
 						<td>
-							<a href="/tags/ioc/{{ item['ioc'] }}">{{ item['ioc'] }}</a>
+							<a href="/ioc/tags/ioc/{{ item['ioc'] }}">{{ item['ioc'] }}</a>
 						</td>
 						<td align="left">
 							{% for tag in item['tags'] %}
-								<a href="/tags/tag/{{ tag['text'] }}"><div class="tag" title="{{ tag['source'].replace('_', ' ') }}">{{tag['text'].replace('_', ' ')}}</div></a>
+								<a href="/ioc/tags/tag/{{ tag['text'] }}"><div class="tag" title="{{ tag['source'].replace('_', ' ') }}">{{tag['text'].replace('_', ' ')}}</div></a>
 							{% end %}
 						</td>
 					</tr>

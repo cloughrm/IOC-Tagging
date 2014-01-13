@@ -157,7 +157,6 @@ def remove_non_ascii(s):
 if __name__ == '__main__':
     settings = {
         'template_path' : os.path.join(os.path.dirname(__file__), 'templates'),
-        'static_path' : os.path.join(os.path.dirname(__file__), 'static'),
     }
     app = tornado.web.Application([
             (r'/', IndexHandler),
@@ -166,8 +165,8 @@ if __name__ == '__main__':
             (r'/tags/([a-zA-Z]*)/{0,1}(.*)', TagHandler),
             (r'/whois', WhoIsHandler),
         ],
-        socket_io_port=8000,
-        debug=True,
+        socket_io_port=3001,
+        debug=False,
         **settings
     )
     tornadio.server.SocketServer(app)

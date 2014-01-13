@@ -5,7 +5,7 @@ window.onload = function() {
 	});
 
     $('#submitIOC').click( function() {
-        window.location = '/tags/ioc/' + $('#ioc_query').val();
+        window.location = '/ioc/tags/ioc/' + $('#ioc_query').val();
         return false;
     });
 };
