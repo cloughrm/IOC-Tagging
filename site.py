@@ -46,8 +46,6 @@ class ExtractIPHandler(BaseHandler):
         elif self.request.files:
             file_info = self.request.files['filearg'][0]
 
-            # filename = file_info['filename']
-            # extension = os.path.splitext(filename)[1]
             content_type = file_info['content_type']
 
             # requires apt-get install python-pdfminer
